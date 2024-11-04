@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaCaretDown, FaSearch } from 'react-icons/fa';
+import { FaCaretDown, FaSearch, FaBars, FaTimes } from 'react-icons/fa';
 import Logo from '../assets/satellite.png';
 
 const Navbar = () => {
   const [isExploreOpen, setIsExploreOpen] = useState(false);
   const [isNewsOpen, setIsNewsOpen] = useState(false);
   const [isMultimediaOpen, setIsMultimediaOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const exploreRef = useRef();
   const newsRef = useRef();
@@ -14,6 +15,7 @@ const Navbar = () => {
   const handleExploreToggle = () => setIsExploreOpen((prev) => !prev);
   const handleNewsToggle = () => setIsNewsOpen((prev) => !prev);
   const handleMultimediaToggle = () => setIsMultimediaOpen((prev) => !prev);
+  const handleMobileMenuToggle = () => setIsMobileMenuOpen((prev) => !prev);
 
   const exploreOptions = [
     "Home",
@@ -29,18 +31,20 @@ const Navbar = () => {
     "About NASA",
     "Español"
   ];
+
   const newsOptions = [
     "All NASA News",
     "Video Series on NASA+",
     "Podcasts",
-    "Bologs",
+    "Blogs",
     "Newsletters",
     "Social Media",
     "Media Resources",
     "Events",
     "Upcoming Launches & Landings",
-    "Vrisual Guest Program"
-    ];
+    "Virtual Guest Program"
+  ];
+
   const multimediaOptions = [
     "NASA+",
     "Images",
@@ -72,11 +76,18 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-black text-white px-8 py-5 flex items-center justify-between">
+    <nav className="bg-black text-white px-4 py-5 flex items-center justify-between relative">
+
+      {/* Mobile Menu Toggle */}
+      <div className="md:hidden">
+        <button onClick={handleMobileMenuToggle}>
+          {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </button>
+      </div>
 
       {/* Left side: Explore dropdown and search */}
       <div className="flex items-center space-x-4">
-        <div className="relative" ref={exploreRef}>
+        <div className="relative hidden md:block" ref={exploreRef}>
           <span className="font-bold cursor-pointer" onClick={handleExploreToggle}>
             Explore
           </span>
@@ -94,7 +105,8 @@ const Navbar = () => {
           )}
         </div>
         
-        <div className="relative">
+        {/* Search Bar */}
+        <div className="relative hidden md:block">
           <input
             type="text"
             placeholder="Search..."
@@ -104,14 +116,13 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Center:logo */}
+      {/* Center: Logo */}
       <div>
-        <img src={Logo} alt="Logo" className="h-16" />
+        <img src={Logo} alt="Logo" className="h-12 md:h-16" />
       </div>
 
       {/* Right side: Links */}
-      <div className="flex items-center space-x-6">
-        {/* News & Events dropdown */}
+      <div className="hidden md:flex items-center space-x-6">
         <div className="relative" ref={newsRef}>
           <span className="cursor-pointer" onClick={handleNewsToggle}>
             News & Events
@@ -148,12 +159,78 @@ const Navbar = () => {
             </div>
           )}
         </div>
-        
+
         <div className="flex items-center space-x-1">
           <span>NASA+</span>
           <span className="bg-red-600 text-white text-xs px-1 rounded">LIVE</span>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-16 left-0 w-full bg-black text-white p-4 flex flex-col space-y-4 z-50 md:hidden">
+          <div className="relative" ref={exploreRef}>
+            <span className="font-bold cursor-pointer" onClick={handleExploreToggle}>
+              Explore
+            </span>
+            {isExploreOpen && (
+              <div className="mt-2 bg-black text-white rounded shadow-lg z-50">
+                <ul>
+                  {exploreOptions.map((option, index) => (
+                    <li key={index} className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                      {option}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          <div className="relative" ref={newsRef}>
+            <span className="cursor-pointer" onClick={handleNewsToggle}>
+              News & Events
+            </span>
+            {isNewsOpen && (
+              <div className="mt-2 bg-black text-white rounded shadow-lg z-50">
+                <ul>
+                  {newsOptions.map((option, index) => (
+                    <li key={index} className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                      {option}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          <div className="relative" ref={multimediaRef}>
+            <span className="cursor-pointer" onClick={handleMultimediaToggle}>
+              Multimedia
+            </span>
+            {isMultimediaOpen && (
+              <div className="mt-2 bg-black text-white rounded shadow-lg z-50">
+                <ul>
+                  {multimediaOptions.map((option, index) => (
+                    <li key={index} className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                      {option}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+          
+          {/* Mobile Search */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="bg-gray-800 text-white px-3 py-1 rounded focus:outline-none placeholder-gray-400 w-full"
+            />
+            <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

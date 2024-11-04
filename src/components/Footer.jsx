@@ -74,7 +74,7 @@ const Footer = () => {
         <p className="hover:underline cursor-pointer">Office of the IG</p>
         <p className="hover:underline cursor-pointer">Budget & Annual Reports</p>
         <p className="hover:underline cursor-pointer">Agency Financial Reports</p>
-        <p className="hover:underline cursor-pointer">Contact NASA</p>
+        <p className="hover:underline cursor-pointer">Contact </p>
         <p className="hover:underline cursor-pointer">Accessibility</p>
       </div>
     </footer>

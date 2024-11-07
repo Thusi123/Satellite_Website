@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../assets/satellite.png';
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -44,19 +45,19 @@ const Footer = () => {
           <h3 className="text-sm font-bold mb-4">Follow Satellite</h3>
           <div className="flex justify-center md:justify-start space-x-4 mb-4">
             <a href="#facebook" className="hover:text-gray-400">
-              <i className="fab fa-facebook-f"></i>
+              <FaFacebookF />
             </a>
             <a href="#twitter" className="hover:text-gray-400">
-              <i className="fab fa-twitter"></i>
+              <FaTwitter />
             </a>
             <a href="#instagram" className="hover:text-gray-400">
-              <i className="fab fa-instagram"></i>
+              <FaInstagram />
             </a>
             <a href="#youtube" className="hover:text-gray-400">
-              <i className="fab fa-youtube"></i>
+              <FaYoutube />
             </a>
             <a href="#linkedin" className="hover:text-gray-400">
-              <i className="fab fa-linkedin"></i>
+              <FaLinkedin />
             </a>
           </div>
           <p className="text-sm hover:underline cursor-pointer mb-2">More Satellite Social Accounts</p>

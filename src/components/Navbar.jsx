@@ -58,7 +58,6 @@ const Navbar = () => {
     "STEM Multimedia"
   ];
 
-  // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (exploreRef.current && !exploreRef.current.contains(event.target)) {
@@ -77,15 +76,12 @@ const Navbar = () => {
 
   return (
     <nav className="bg-black text-white px-4 py-5 flex items-center justify-between relative">
-
-      {/* Mobile Menu Toggle */}
       <div className="md:hidden">
         <button onClick={handleMobileMenuToggle}>
           {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
       </div>
 
-      {/* Left side: Explore dropdown and search */}
       <div className="flex items-center space-x-4">
         <div className="relative hidden md:block" ref={exploreRef}>
           <span className="font-bold cursor-pointer" onClick={handleExploreToggle}>
@@ -105,7 +101,6 @@ const Navbar = () => {
           )}
         </div>
         
-        {/* Search Bar */}
         <div className="relative hidden md:block">
           <input
             type="text"
@@ -116,12 +111,10 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Center: Logo */}
       <div>
         <img src={Logo} alt="Logo" className="h-12 md:h-16" />
       </div>
 
-      {/* Right side: Links */}
       <div className="hidden md:flex items-center space-x-6">
         <div className="relative" ref={newsRef}>
           <span className="cursor-pointer" onClick={handleNewsToggle}>
@@ -141,7 +134,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Multimedia dropdown */}
         <div className="relative" ref={multimediaRef}>
           <span className="cursor-pointer" onClick={handleMultimediaToggle}>
             Multimedia
@@ -166,7 +158,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="absolute top-16 left-0 w-full bg-black text-white p-4 flex flex-col space-y-4 z-50 md:hidden">
           <div className="relative" ref={exploreRef}>
@@ -220,7 +211,6 @@ const Navbar = () => {
             )}
           </div>
           
-          {/* Mobile Search */}
           <div className="relative">
             <input
               type="text"
